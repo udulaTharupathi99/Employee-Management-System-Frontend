@@ -35,7 +35,16 @@ const DepartmentForm = () => {
       DepartmentService.updateDepartment(department).then((response) => {
         Swal.fire("Success", "Department Updated Successfully", "success");
         navigate("/departments");
-      });
+      })
+      .catch((error) => {
+        console.log("bbb", error.response.data);
+        let m = error.response.data;
+        Swal.fire({
+          icon: "error",
+          title: "Something went wrong",
+          text: m,
+        });
+      });;
     } else {
       DepartmentService.addDepartment(department)
         .then((response) => {
@@ -43,7 +52,13 @@ const DepartmentForm = () => {
           navigate("/departments");
         })
         .catch((error) => {
-          console.log(error);
+          console.log("bbb", error.response.data);
+          let m = error.response.data;
+          Swal.fire({
+            icon: "error",
+            title: "Something went wrong",
+            text: m,
+          });
         });
     }
   };
